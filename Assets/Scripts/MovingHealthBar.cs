@@ -9,13 +9,20 @@ public class MovingHealthBar : MonoBehaviour
     [SerializeField] Health enemyHealth;
     [SerializeField] Slider slider;
     [SerializeField] Image barColor;
+    Enemy enemy;
 
     private void Start()
     {
+        enemy = GetComponent<Enemy>();
             maxHealth = enemyHealth.GetMaxHealth();
             currentHealth = enemyHealth.GetCurrentHealth();
             slider.maxValue = maxHealth;
             slider.value = currentHealth;
+    }
+
+    private void Update()
+    {
+        SetAactiveTarget();
     }
 
     public void UpdateHealth(int health)
@@ -25,11 +32,25 @@ public class MovingHealthBar : MonoBehaviour
 
     public void SetBarColorYellow()
     {
-        barColor.color = new Color32(192, 10, 10, 255);
+        barColor.color = Color.yellow;
+
     }
 
     public void SetBarColorRed()
     {
-        barColor.color = Color.yellow;
+        barColor.color = new Color32(192, 10, 10, 255);
     }
+
+    private void SetAactiveTarget()
+    {
+        if (enemy.isCurrentTarget == true)
+        {
+            SetBarColorYellow();
+        }
+        else
+        {
+            SetBarColorRed();
+        }
+    }
+
 }

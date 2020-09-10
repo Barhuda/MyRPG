@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         castEnemy = FindObjectOfType<Player>().GetCastingTarget();
-        enemyPosition = new Vector2(castEnemy.transform.position.x, castEnemy.transform.position.y);
+        //enemyPosition = new Vector2(castEnemy.transform.position.x, castEnemy.transform.position.y);
 
         projectileParent = GameObject.Find(PROJECTILE_PARENT);
         if (!projectileParent)
@@ -29,8 +29,11 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-
-        transform.position = Vector2.MoveTowards(transform.position, enemyPosition, speed * Time.deltaTime);
+        if (castEnemy)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, castEnemy.transform.position, speed * Time.deltaTime);
+        }
+        
 
     }
 

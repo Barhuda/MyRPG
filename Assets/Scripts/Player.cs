@@ -35,8 +35,6 @@ public class Player : MonoBehaviour
         cb = FindObjectOfType<CastBar>();
         playerMana = GetComponent<Mana>();
         rb = GetComponent<Rigidbody2D>();
-        targetDuringCastStart = currentTarget;
-
         InvokeRepeating("GenerateManaPassive", 2, 5);
 
     }
@@ -67,7 +65,6 @@ public class Player : MonoBehaviour
             rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-                Debug.Log("Stop Cast!!!");
                 StopCasting();
             }
         }
@@ -79,27 +76,26 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            currentTarget = listOfEnemies[targetingIndex];
-            currentTarget.GetComponent<MovingHealthBar>().SetBarColorYellow();
-            
-
-            currentTarget.GetComponent<MovingHealthBar>().SetBarColorRed();
-
-            targetDisplay.UpdateDisplay(currentTarget.name);
-            if (targetingIndex < listOfEnemies.Count - 1)
+            if (currentTarget != null)
             {
-                targetingIndex++;
-
+                currentTarget.isCurrentTarget = false;
             }
-            else
+            
+            targetingIndex++;
+            if (targetingIndex > listOfEnemies.Count - 1)
             {
                 targetingIndex = 0;
+
             }
+            currentTarget = listOfEnemies[targetingIndex];
+            currentTarget.isCurrentTarget = true;
+            targetDisplay.UpdateDisplay(currentTarget.name);
+
         }
     }
 
 
-    
+    /*
     private void Shoot()
     {
         if (Input.GetKeyDown(KeyCode.Space) && currentTarget != null)
@@ -111,6 +107,7 @@ public class Player : MonoBehaviour
             shootingProjectile.SetSpeed(7);
         }
     }
+    */
 
     private void Cast()
     {

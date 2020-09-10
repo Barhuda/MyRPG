@@ -17,7 +17,8 @@ MonoBehaviour:
   manaCost: 2
   icon: {fileID: 21300000, guid: ad97249b065138f47a1f18093545643b, type: 3}
   speed: 5
-  castTime: 3
-  spellPrefab: {fileID: 546841194261220885, guid: 13cfcb33cdb03544dbc69af53690e55c,
+  castTime: 2
+  spellPrefab: {fileID: 546841194261220885, guid: 7d3feb3d52293f94ebeaa00d13e37380,
     type: 3}
   barcolor: {r: 0.9339623, g: 0.21798274, b: 0.066082224, a: 1}
+  cooldown: 0

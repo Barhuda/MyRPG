@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     EnemyAI enemyAI;
 
 
-    bool isCurrentTarget = false;
+    public bool isCurrentTarget = false;
     bool isCastingTarget = false;
 
 
@@ -81,6 +81,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(gameObject.name +" isAttacking");
         playerHealth.TakeDamage(damage);
         yield return new WaitForSeconds(timeBetweenAttacks);
+        Debug.Log("Waiting finished");
         enemyAI.RestartMovement();
         isAttacking = false;
     }

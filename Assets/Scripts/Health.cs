@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Player>();
-        enemy = FindObjectOfType<Enemy>();
+        enemy = GetComponent<Enemy>();
 
     }
 
@@ -47,10 +47,11 @@ public class Health : MonoBehaviour
 
     private void Death()
     {
-        Destroy(gameObject);
+        
         if (enemy)
         {
-player.RemoveEnemyFromTargetList(enemy);
+            player.RemoveEnemyFromTargetList(enemy);
+            Destroy(gameObject);
         }
         
     }
